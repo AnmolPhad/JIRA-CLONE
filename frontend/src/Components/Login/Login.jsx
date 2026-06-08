@@ -29,12 +29,15 @@ const Login = () => {
           u.password === loginCredentials.password
       );
 
-      if (user) {
-        localStorage.setItem("user", JSON.stringify(user));
-        navigate("/dashboard");
-      } else {
-        setMessage("Invalid Email or Password");
-      }
+     if (user) {
+  localStorage.setItem("user", JSON.stringify(user));
+
+  // Redirect to Board Page after login
+  navigate("/hero");
+
+} else {
+  setMessage("Invalid Email or Password");
+}
 
       setIsLoggingIn(false);
       reset();
