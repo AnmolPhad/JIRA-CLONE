@@ -1,77 +1,46 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Jira from "../../icons/Jira";
+import Search from "../../icons/Search";
+import Plus from "../../icons/Plus";
 
 const Navbar = () => {
-  const navigate = useNavigate();
-
-  const logout = () => {
-    localStorage.removeItem("user");
-    navigate("/");
-  };
+  const [active, setActive] = useState("search");
 
   return (
-    <nav className="bg-blue-600 text-white shadow-md">
-
-      <div className="flex items-center justify-between px-6 py-4">
-
-        {/* Logo */}
-        <h1
-          className="text-2xl font-bold cursor-pointer"
-          onClick={() => navigate("/project")}
-        >
-          Jira Clone
-        </h1>
-
-        {/* Navigation */}
-        <div className="flex items-center gap-4">
-
-          <button
-            onClick={() => navigate("/project")}
-            className="hover:text-gray-200"
-          >
-            Kanban Board
-          </button>
-
-          <button
-            onClick={() => navigate("/project/settings")}
-            className="hover:text-gray-200"
-          >
-            Settings
-          </button>
-
-          <button
-            onClick={() => navigate("/project/user-settings")}
-            className="hover:text-gray-200"
-          >
-            Profile
-          </button>
-
-          {/* Search */}
-          <input
-            type="text"
-            placeholder="Search Issues..."
-            className="px-3 py-2 rounded text-black outline-none"
-          />
-
-          {/* Create Issue */}
-          <button
-            className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg"
-          >
-            + Create Issue
-          </button>
-
-          {/* Logout */}
-          <button
-            onClick={logout}
-            className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg"
-          >
-            Logout
-          </button>
-
-        </div>
-
+    <nav className="fixed left-0 top-0 h-screen w-[65px] bg-[#0747A6] flex flex-col items-center">
+      {/* Logo */}
+      <div className="mt-5 mb-10 cursor-pointer">
+        <Jira size={34} className="text-white" />
       </div>
 
+      {/* Navigation */}
+      <div className="flex flex-col items-center gap-4 w-full">
+        {/* Search */}
+        <button
+          onClick={() => setActive("search")}
+          className={`w-full h-14 flex justify-center items-center transition-all duration-200
+            ${
+              active === "search"
+                ? "bg-blue-700 border-l-4 border-white"
+                : "hover:bg-blue-700"
+            }`}
+        >
+          <Search size={24} className="text-white" />
+        </button>
+
+        {/* Create Issue */}
+        <button
+          onClick={() => setActive("create")}
+          className={`w-full h-14 flex justify-center items-center transition-all duration-200
+            ${
+              active === "create"
+                ? "bg-blue-700 border-l-4 border-white"
+                : "hover:bg-blue-700"
+            }`}
+        >
+          <Plus size={24} className="text-white" />
+        </button>
+      </div>
     </nav>
   );
 };

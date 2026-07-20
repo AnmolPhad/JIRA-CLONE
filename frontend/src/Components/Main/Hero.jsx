@@ -1,4 +1,4 @@
-import Sidebar from "../../Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import Board from "../Board/Board";
 import Kanban from "../Kanban/Kanban";
 import Navbar from "../Navbar/Navbar";
