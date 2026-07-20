@@ -151,8 +151,8 @@ const Login = () => {
             Demo Credentials
           </p>
 
-          <p>Email: swapnil@gmail.com</p>
-          <p>Password: swapnil123</p>
+          <p>Email: demo@gmail.com</p>
+          <p>Password: demo1234</p>
         </div>
       </div>
     </div>
