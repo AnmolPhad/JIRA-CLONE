@@ -33,7 +33,7 @@ const Login = () => {
   localStorage.setItem("user", JSON.stringify(user));
 
   // Redirect to Board Page after login
-  navigate("/hero");
+  navigate("/project");
 
 } else {
   setMessage("Invalid Email or Password");
