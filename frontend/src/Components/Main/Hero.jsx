@@ -4,17 +4,25 @@ import Sidebar from "../Sidebar/Sidebar";
 
 function Hero() {
   return (
-    <div className="flex h-screen overflow-hidden bg-[#F4F5F7]">
-      {/* Blue Navbar */}
+    <div className="h-screen bg-[#FAFBFC] overflow-hidden">
+      {/* Left Blue Navbar */}
       <Navbar />
 
-      {/* White Sidebar */}
+      {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content */}
-      <main className="ml-[326px] flex-1 overflow-y-auto px-6 py-4
-      ">
-        <Outlet />
+      <main
+        className="
+          ml-[304px]
+          h-screen
+          overflow-y-auto
+          bg-white
+        "
+      >
+        <div className="w-[880px] p-8">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

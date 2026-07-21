@@ -20,97 +20,105 @@ const Sidebar = ({
     MARKETING: "Marketing",
   };
 
-  return (
-    <aside className="fixed left-[60px]
-     top-0 h-screen overflow-y-auto w-[250px] bg-[#eeeff1] border-r border-gray-200">
+  const menu = [
+    {
+      title: "Kanban Board",
+      icon: <Kanban size={18} />,
+      link: "/project",
+    },
+    {
+      title: "Project Settings",
+      icon: <Settings size={18} />,
+      link: "/project/settings",
+    },
+    {
+      title: "User Settings",
+      icon: <User size={18} />,
+      link: "/project/user-settings",
+    },
+  ];
 
-      {/* Project Info */}
-      <div className="flex items-center gap-3 p-6 border-b border-gray-200">
-        <div className="w-12 h-12 rounded-md bg-[#0052CC] flex items-center justify-center text-white text-xl font-bold">
+  const others = [
+    { title: "Releases", icon: <Releases size={18} /> },
+    { title: "Issues & Filters", icon: <Search size={18} /> },
+    { title: "Pages", icon: <Pages size={18} /> },
+    { title: "Reports", icon: <Reports size={18} /> },
+    { title: "Components", icon: <Components size={18} /> },
+  ];
+
+  return (
+    <aside
+      className="
+      fixed
+      left-16
+      top-0
+      h-screen
+      w-[240px]
+      bg-[#F4F5F7]
+      border-r
+      border-[#DFE1E6]
+      overflow-y-auto
+    "
+    >
+      {/* Project Header */}
+      <div className="flex items-start px-4 py-6">
+        <div className="w-10 h-10 bg-[#0052CC] rounded flex items-center justify-center text-white font-bold text-lg">
           J
         </div>
 
-        <div>
-          <h2 className="text-lg font-semibold">{name}</h2>
-          <p className="text-sm text-gray-500">
-            {categoryMap[category]} Project
-          </p>
+        <div className="ml-3">
+          <div className="text-[16px] font-black text-[#42526E]">
+            {name}
+          </div>
+
+          <div className="text-[14px] text-[#42526E]">
+            {categoryMap[category]} project
+          </div>
         </div>
       </div>
 
-      {/* Navigation */}
-      <div className="p-4 space-y-2">
+      {/* Main Navigation */}
+      <div className="px-2">
+        {menu.map((item) => (
+          <NavLink
+            key={item.title}
+            to={item.link}
+            end={item.link === "/project"}
+            className={({ isActive }) =>
+              `flex items-center px-3 py-2 text-[15px] mb-1 transition
+              ${
+                isActive
+                  ? "bg-[#EBECF0] text-[#0052CC] font-semibold"
+                  : "text-[#42526E] hover:bg-[#EBECF0]"
+              }`
+            }
+          >
+            <span className="mr-4">{item.icon}</span>
+            {item.title}
+          </NavLink>
+        ))}
 
-        <NavLink
-          to="/project"
-          end
-          className={({ isActive }) =>
-            `flex items-center gap-3 px-3 py-2 rounded-md transition ${
-              isActive
-                ? "bg-blue-50 text-blue-600"
-                : "text-gray-700 hover:bg-gray-100"
-            }`
-          }
-        >
-          <Kanban size={20} />
-          <span>Kanban Board</span>
-        </NavLink>
+        <div className="border-t border-[#DFE1E6] my-4" />
 
-        <NavLink
-          to="/project/settings"
-          className={({ isActive }) =>
-            `flex items-center gap-3 px-3 py-2 rounded-md transition ${
-              isActive
-                ? "bg-blue-50 text-blue-600"
-                : "text-gray-700 hover:bg-gray-100"
-            }`
-          }
-        >
-          <Settings size={20} />
-          <span>Project Settings</span>
-        </NavLink>
-
-        <NavLink
-          to="/project/user-settings"
-          className={({ isActive }) =>
-            `flex items-center gap-3 px-3 py-2 rounded-md transition ${
-              isActive
-                ? "bg-blue-50 text-blue-600"
-                : "text-gray-700 hover:bg-gray-100"
-            }`
-          }
-        >
-          <User size={20} />
-          <span>User Settings</span>
-        </NavLink>
-
-        <hr className="my-4 border-gray-200" />
-
-        <div className="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
-          <Releases size={20} />
-          <span>Releases</span>
-        </div>
-
-        <div className="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
-          <Search size={20} />
-          <span>Issues & Filters</span>
-        </div>
-
-        <div className="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
-          <Pages size={20} />
-          <span>Pages</span>
-        </div>
-
-        <div className="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
-          <Reports size={20} />
-          <span>Reports</span>
-        </div>
-
-        <div className="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
-          <Components size={20} />
-          <span>Components</span>
-        </div>
-
+        {others.map((item) => (
+          <div
+            key={item.title}
+            className="
+            flex
+            items-center
+            px-3
+            py-2
+            text-[15px]
+            text-[#42526E]
+            cursor-pointer
+            hover:bg-[#EBECF0]
+            mb-1
+          "
+          >
+            <span className="mr-4">{item.icon}</span>
+            {item.title}
+          </div>
+        ))}
       </div>
     </aside>
   );
