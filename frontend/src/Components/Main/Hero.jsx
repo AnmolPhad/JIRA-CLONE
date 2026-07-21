@@ -1,14 +1,19 @@
+import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Sidebar from "../Sidebar/Sidebar";
-import { Outlet } from "react-router-dom";
 
 function Hero() {
   return (
-    <div className="min-h-screen bg-[#F4F5F7]">
+    <div className="flex h-screen overflow-hidden bg-[#F4F5F7]">
+      {/* Blue Navbar */}
       <Navbar />
+
+      {/* White Sidebar */}
       <Sidebar />
 
-      <main className="ml-[326px] min-h-screen p-8">
+      {/* Main Content */}
+      <main className="ml-[326px] flex-1 overflow-y-auto px-6 py-4
+      ">
         <Outlet />
       </main>
     </div>

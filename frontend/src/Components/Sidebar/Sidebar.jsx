@@ -21,7 +21,8 @@ const Sidebar = ({
   };
 
   return (
-    <aside className="fixed left-[76px] top-0 h-screen w-[250px] bg-white border-r border-gray-200">
+    <aside className="fixed left-[60px]
+     top-0 h-screen overflow-y-auto w-[250px] bg-[#eeeff1] border-r border-gray-200">
 
       {/* Project Info */}
       <div className="flex items-center gap-3 p-6 border-b border-gray-200">
