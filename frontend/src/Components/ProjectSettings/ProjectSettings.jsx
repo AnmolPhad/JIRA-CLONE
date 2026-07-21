@@ -1,69 +1,105 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProjectSettings = () => {
+  const navigate = useNavigate();
+
   const [project, setProject] = useState({
-    name: "",
-    url: "",
+    name: "Jira Clone",
+    url: "https://jiralite.com",
     category: "SOFTWARE",
     description: "",
   });
 
   const handleChange = (e) => {
-    setProject({
-      ...project,
+    setProject((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   return (
-<div className="max-w-3xl">
+    <div className="w-full">
       {/* Breadcrumb */}
-      <div className="text-gray-500 text-sm mb-4">
-        Projects <span className="mx-2">/</span>
+      <div className="flex items-center text-[14px] font-semibold text-[#5E6C84] mb-4">
+        <span>Projects</span>
         <span className="mx-2">/</span>
-        <span className="text-blue-900 font-medium">Settings</span>
+        <span>Jira Clone</span>
+        <span className="mx-2">/</span>
+        <span className="text-[#172B4D]">Settings</span>
       </div>
 
       {/* Title */}
-      <h1 className="text-3xl font-bold text-[#172B4D] mb-4">
+      <h1 className="text-[24px] font-extrabold text-[#172B4D] mb-7">
         Project Settings
       </h1>
 
       {/* Form */}
+      <div className="max-w-[620px]">
 
-      <div className="space-y-7">
         {/* Name */}
-
-        <div>
-          <label className="block font-medium text-gray-700 mb-2">Name</label>
+        <div className="mb-6">
+          <label className="block text-[14px] font-semibold text-[#5E6C84] mb-2">
+            Name
+          </label>
 
           <input
             type="text"
             name="name"
             value={project.name}
             onChange={handleChange}
-            className="w-full h-12 border border-gray-300 rounded px-4 focus:outline-none focus:border-blue-500"
+            className="
+              w-full
+              rounded
+              border
+              border-[#DFE1E6]
+              px-4
+              py-3
+              text-[14px]
+              bg-white
+              hover:bg-[#F4F5F7]
+              focus:bg-white
+              focus:border-[#4C9AFF]
+              focus:ring-1
+              focus:ring-[#4C9AFF]
+              outline-none
+            "
           />
         </div>
 
         {/* URL */}
-
-        <div>
-          <label className="block font-medium text-gray-700 mb-2">URL</label>
+        <div className="mb-6">
+          <label className="block text-[14px] font-semibold text-[#5E6C84] mb-2">
+            URL
+          </label>
 
           <input
             type="text"
             name="url"
             value={project.url}
             onChange={handleChange}
-            className="w-full h-12 border border-gray-300 rounded px-4 focus:outline-none focus:border-blue-500"
+            className="
+              w-full
+              rounded
+              border
+              border-[#DFE1E6]
+              px-4
+              py-3
+              text-[14px]
+              bg-white
+              hover:bg-[#F4F5F7]
+              focus:bg-white
+              focus:border-[#4C9AFF]
+              focus:ring-1
+              focus:ring-[#4C9AFF]
+              outline-none
+            "
           />
         </div>
 
         {/* Category */}
-
-        <div>
-          <label className="block font-medium text-gray-700 mb-2">
+        <div className="mb-6">
+          <label className="block text-[14px] font-semibold text-[#5E6C84] mb-2">
             Category
           </label>
 
@@ -71,7 +107,22 @@ const ProjectSettings = () => {
             name="category"
             value={project.category}
             onChange={handleChange}
-            className="w-full h-12 border border-gray-300 rounded px-4 focus:outline-none focus:border-blue-500"
+            className="
+              w-full
+              rounded
+              border
+              border-[#DFE1E6]
+              px-4
+              py-3
+              text-[14px]
+              bg-white
+              hover:bg-[#F4F5F7]
+              focus:bg-white
+              focus:border-[#4C9AFF]
+              focus:ring-1
+              focus:ring-[#4C9AFF]
+              outline-none
+            "
           >
             <option value="SOFTWARE">Software</option>
             <option value="BUSINESS">Business</option>
@@ -80,32 +131,68 @@ const ProjectSettings = () => {
         </div>
 
         {/* Description */}
-
-        <div>
-          <label className="block font-medium text-gray-700 mb-2">
+        <div className="mb-8">
+          <label className="block text-[14px] font-semibold text-[#5E6C84] mb-2">
             Description
           </label>
 
           <textarea
+            rows={5}
             name="description"
             value={project.description}
             onChange={handleChange}
-            rows="4"
             placeholder="Issue Title"
-            className="w-full border border-gray-300 rounded p-4 resize-none focus:outline-none focus:border-blue-500"
+            className="
+              w-full
+              rounded
+              border
+              border-[#DFE1E6]
+              px-4
+              py-3
+              text-[14px]
+              resize-none
+              bg-white
+              hover:bg-[#F4F5F7]
+              focus:bg-white
+              focus:border-[#4C9AFF]
+              focus:ring-1
+              focus:ring-[#4C9AFF]
+              outline-none
+            "
           />
         </div>
 
         {/* Buttons */}
-
-        <div className="flex items-center gap-5 pt-2">
-          <button className="bg-[#0052CC] hover:bg-[#0747A6] text-white px-3
-           py-1 rounded">
+        <div className="flex items-center gap-2">
+          <button
+            className="
+              h-8
+              px-3
+              rounded
+              bg-[#0052CC]
+              text-white
+              text-[14px]
+              hover:bg-[#0065FF]
+            "
+          >
             Save
           </button>
 
-          <button className="text-gray-700 hover:text-black">Cancel</button>
+          <button
+            onClick={() => navigate("/project")}
+            className="
+              h-8
+              px-3
+              rounded
+              text-[14px]
+              text-[#42526E]
+              hover:bg-[#EBECF0]
+            "
+          >
+            Cancel
+          </button>
         </div>
+
       </div>
     </div>
   );
