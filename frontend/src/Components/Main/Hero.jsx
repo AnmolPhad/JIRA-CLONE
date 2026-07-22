@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Sidebar from "../Sidebar/Sidebar";
+import Board from "../Board/Board";
 
 function Hero() {
   return (
@@ -12,18 +13,11 @@ function Hero() {
       <Sidebar />
 
       {/* Main Content */}
-      <main
-        className="
-          ml-[304px]
-          h-screen
-          overflow-y-auto
-          bg-white
-        "
-      >
-        <div className="w-[880px] p-8">
-          <Outlet />
-        </div>
-      </main>
+<main className="ml-[304px] px-8 py-6">
+    <div className="max-w-[1200px]">
+        <Board />
+    </div>
+</main>
     </div>
   );
 }

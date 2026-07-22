@@ -1,11 +1,11 @@
-const Board = () => {
+import Kanban from "../KanBan/Kanban";
+
+function Board() {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold">
-        Kanban Board
-      </h1>
+    <div className="w-full">
+      <Kanban />
     </div>
   );
-};
+}
 
 export default Board;
