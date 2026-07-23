@@ -40,13 +40,13 @@ const CreateIssue = ({ onClose }) => {
         className="
           relative
           w-[910px]
-          max-w-[95vw]
+          max-w-[75vw]
           bg-white
           rounded
           shadow-2xl
           px-8
-          pt-7
-          pb-8
+          pt-4
+          pb-9
           
         "
       >
@@ -66,9 +66,9 @@ const CreateIssue = ({ onClose }) => {
         </button>
 
         {/* Title */}
-        <h1 className="text-[28px]
+        <h1 className="text-[24px]
 font-normal
-tracking-tight text-[#172B4D] mt-0 mb-0 ">
+tracking-tight text-[#172B4D] mb-1 ">
           Create Issue
         </h1>
 
