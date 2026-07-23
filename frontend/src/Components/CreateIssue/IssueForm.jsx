@@ -1,13 +1,14 @@
 import { useState } from "react";
-
+import ReporterSelect from "./ReporterSelect";
 const IssueForm = ({ onClose }) => {
-  const [form, setForm] = useState({
-    type: "TASK",
-    title: "",
-    description: "",
-    priority: "MEDIUM",
-    assignee: "AP",
-  });
+const [form, setForm] = useState({
+  type: "TASK",
+  title: "",
+  description: "",
+  priority: "MEDIUM",
+  reporter: "1",
+  assignee: "",
+});
 
   const handleChange = (e) => {
     setForm({
@@ -30,7 +31,7 @@ const IssueForm = ({ onClose }) => {
     <form onSubmit={handleSubmit}>
       {/* Type */}
       <div className="mb-2">
-        <label className="block text-sm font-semibold mb-2 mt-8">
+        <label className="block text-sm font-semibold mb-2">
           Issue Type
         </label>
 
@@ -47,7 +48,7 @@ const IssueForm = ({ onClose }) => {
       </div>
 
       {/* Summary */}
-      <div className="mb-5">
+      <div className="mb-2">
         <label className="block text-sm font-semibold mb-2">
           Short Summary
         </label>
@@ -58,28 +59,22 @@ const IssueForm = ({ onClose }) => {
           value={form.title}
           onChange={handleChange}
           placeholder="Issue summary..."
-          className="w-full border rounded px-3 py-2"
+          className="
+w-full
+h-11
+border
+border-[#DFE1E6]
+rounded
+px-4
+text-[15px]
+focus:outline-none
+focus:border-[#4C9AFF]
+"
         />
       </div>
 
-      {/* Description */}
-      <div className="mb-5">
-        <label className="block text-sm font-semibold mb-2">
-          Description
-        </label>
-
-        <textarea
-          rows="5"
-          name="description"
-          value={form.description}
-          onChange={handleChange}
-          placeholder="Describe the issue..."
-          className="w-full border rounded px-3 py-2 resize-none"
-        />
-      </div>
-
-      {/* Priority */}
-      <div className="mb-5">
+  {/* Priority */}
+      <div className="mb-2">
         <label className="block text-sm font-semibold mb-2">
           Priority
         </label>
@@ -88,13 +83,69 @@ const IssueForm = ({ onClose }) => {
           name="priority"
           value={form.priority}
           onChange={handleChange}
-          className="w-full border rounded px-3 py-2"
+          className="
+w-full
+h-11
+border
+border-[#DFE1E6]
+rounded
+px-4
+text-[15px]
+focus:outline-none
+focus:border-[#4C9AFF]
+"
         >
           <option value="LOW">Low</option>
           <option value="MEDIUM">Medium</option>
           <option value="HIGH">High</option>
         </select>
       </div>
+
+      {/* Description */}
+      <div className="mb-2">
+        <label className="block text-sm font-semibold mb-2">
+          Description
+        </label>
+
+        <textarea
+          rows="4"
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          placeholder="Describe the issue..."
+          className="
+w-full
+min-h-[120px]
+border
+border-[#DFE1E6]
+rounded
+px-4
+py-3
+resize-none
+text-[15px]
+focus:outline-none
+focus:border-[#4C9AFF]
+"
+        />
+      </div>
+
+    
+
+<div className="mb-2">
+  <label className="block text-sm font-semibold mb-2">
+    Reporter
+  </label>
+
+  <ReporterSelect
+    value={form.reporter}
+    onChange={(value) =>
+      setForm({
+        ...form,
+        reporter: value,
+      })
+    }
+  />
+</div>
 
       {/* Assignee */}
       <div className="mb-6">
@@ -106,7 +157,17 @@ const IssueForm = ({ onClose }) => {
           name="assignee"
           value={form.assignee}
           onChange={handleChange}
-          className="w-full border rounded px-3 py-2"
+         className="
+w-full
+h-11
+border
+border-[#DFE1E6]
+rounded
+px-4
+text-[15px]
+focus:outline-none
+focus:border-[#4C9AFF]
+"
         >
           <option value="AP">Anmol</option>
           <option value="RK">Rahul</option>
@@ -115,7 +176,7 @@ const IssueForm = ({ onClose }) => {
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-end gap-3">
+      <div className="flex justify-end gap-3 ">
         <button
           type="button"
           onClick={onClose}
@@ -128,7 +189,7 @@ const IssueForm = ({ onClose }) => {
           type="submit"
           className="px-5 py-2 rounded bg-[#0052CC] text-white hover:bg-[#0747A6]"
         >
-          Create
+          Create Issue
         </button>
       </div>
     </form>
