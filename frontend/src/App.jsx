@@ -9,17 +9,39 @@ import Board from "./Components/Board/Board";
 import ProjectSettings from "./Components/ProjectSettings/ProjectSettings";
 import UserSettings from "./Components/UserSettings/UserSettings";
 
+// NEW
+import IssueView from "./Components/IssueView/IssueView";
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Authentication */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
+        {/* Project */}
         <Route path="/project" element={<Hero />}>
+          {/* Kanban Board */}
           <Route index element={<Board />} />
-          <Route path="settings" element={<ProjectSettings />} />
-          <Route path="user-settings" element={<UserSettings />} />
+
+          {/* Issue Details */}
+          <Route
+            path="issue/:id"
+            element={<IssueView />}
+          />
+
+          {/* Project Settings */}
+          <Route
+            path="settings"
+            element={<ProjectSettings />}
+          />
+
+          {/* User Settings */}
+          <Route
+            path="user-settings"
+            element={<UserSettings />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

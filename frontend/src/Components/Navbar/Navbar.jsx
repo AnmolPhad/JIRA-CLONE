@@ -5,7 +5,7 @@ import Jira from "../../icons/Jira";
 import Search from "../../icons/Search";
 import Plus from "../../icons/Plus";
 
-const Navbar = () => {
+const Navbar = ({ issues, setIssues }) => {
   const [active, setActive] = useState("search");
   const [showCreateIssue, setShowCreateIssue] = useState(false);
 
@@ -80,13 +80,14 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Bottom Spacer */}
         <div className="flex-1" />
       </nav>
 
       {/* Create Issue Modal */}
       {showCreateIssue && (
         <CreateIssue
+          issues={issues}
+          setIssues={setIssues}
           onClose={() => {
             setShowCreateIssue(false);
             setActive("search");
