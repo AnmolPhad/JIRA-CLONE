@@ -44,22 +44,16 @@ const menuItems = [
 
 const AdminSidebar = () => {
   return (
-    <aside className="w-72 h-screen bg-white border-r border-gray-200 flex flex-col">
-
+    <aside className="w-68 screen bg-white border-r border-gray-200 flex flex-col">
       {/* Logo */}
       <div className="px-7 py-6 border-b border-gray-200">
-        <h1 className="text-3xl font-bold text-[#172B4D]">
-          Jira Clone
-        </h1>
+        <h1 className="text-3xl font-bold text-[#172B4D]">ABC Company</h1>
 
-        <p className="text-sm text-[#5E6C84] mt-1">
-          Administration
-        </p>
+        <p className="text-sm text-[#5E6C84] mt-1">Administration</p>
       </div>
 
       {/* Menu */}
       <nav className="mt-5 flex-1">
-
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
@@ -78,30 +72,22 @@ const AdminSidebar = () => {
             <span>{item.name}</span>
           </NavLink>
         ))}
-
       </nav>
 
       {/* Footer */}
       <div className="border-t border-gray-200 p-5">
         <div className="flex items-center gap-3">
-
           <div className="w-10 h-10 rounded-full bg-[#0052CC] text-white flex items-center justify-center font-bold">
             A
           </div>
 
           <div>
-            <p className="font-semibold text-[#172B4D]">
-              Admin
-            </p>
+            <p className="font-semibold text-[#172B4D]">Admin</p>
 
-            <p className="text-xs text-[#5E6C84]">
-              System Administrator
-            </p>
+            <p className="text-xs text-[#5E6C84]">System Administrator</p>
           </div>
-
         </div>
       </div>
-
     </aside>
   );
 };

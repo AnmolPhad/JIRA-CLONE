@@ -96,7 +96,7 @@ function Board() {
   };
 
   return (
-    <div className="w-full px-8 py-6">
+    <div className="w-full ">
       {/* Breadcrumb */}
       <div className="flex items-center text-sm text-[#5E6C84] font-medium mb-2">
         <span>Projects</span>
