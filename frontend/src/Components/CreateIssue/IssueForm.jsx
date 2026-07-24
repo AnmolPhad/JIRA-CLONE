@@ -1,14 +1,30 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import ReporterSelect from "./ReporterSelect";
-const IssueForm = ({ onClose }) => {
-const [form, setForm] = useState({
-  type: "TASK",
-  title: "",
-  description: "",
-  priority: "MEDIUM",
-  reporter: "1",
-  assignee: "",
-});
+
+const IssueForm = ({ onClose, issues, setIssues }) => {
+  const [form, setForm] = useState({
+    type: "TASK",
+    title: "",
+    description: "",
+    priority: "MEDIUM",
+    reporter: "1",
+    assignee: "AP",
+    labels: [],
+    dueDate: "",
+  });
+
+  const labelOptions = [
+    "Frontend",
+    "Backend",
+    "UI",
+    "Bug",
+    "Feature",
+    "Testing",
+    "Documentation",
+    "API",
+    "Urgent",
+  ];
 
   const handleChange = (e) => {
     setForm({
@@ -17,20 +33,67 @@ const [form, setForm] = useState({
     });
   };
 
+  const handleLabelChange = (label) => {
+    if (form.labels.includes(label)) {
+      setForm({
+        ...form,
+        labels: form.labels.filter((item) => item !== label),
+      });
+    } else {
+      setForm({
+        ...form,
+        labels: [...form.labels, label],
+      });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(form);
+    // Validation
+    if (!form.title.trim()) {
+      toast.error("Please enter issue summary!");
+      return;
+    }
 
-    // Backend / Context will be connected later
+    // Generate ID
+    const newId =
+      issues.length > 0
+        ? Math.max(...issues.map((issue) => issue.id)) + 1
+        : 1;
 
+    // Generate Key
+    const newKey = `JIRA-${newId}`;
+
+    // Create New Issue
+    const newIssue = {
+      id: newId,
+      key: newKey,
+      title: form.title,
+      description: form.description,
+      type: form.type,
+      priority: form.priority,
+      reporter: form.reporter,
+      assignee: form.assignee,
+      status: "BACKLOG",
+      labels: form.labels,
+      dueDate: form.dueDate,
+    };
+
+    // Add Issue
+    setIssues((prev) => [...prev, newIssue]);
+
+    // Success Toast
+    toast.success("Issue created successfully!");
+
+    // Close Modal
     onClose();
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Type */}
-      <div className="mb-2">
+      {/* Issue Type */}
+      <div className="mb-3">
         <label className="block text-sm font-semibold mb-2">
           Issue Type
         </label>
@@ -48,7 +111,7 @@ const [form, setForm] = useState({
       </div>
 
       {/* Summary */}
-      <div className="mb-2">
+      <div className="mb-3">
         <label className="block text-sm font-semibold mb-2">
           Short Summary
         </label>
@@ -59,22 +122,12 @@ const [form, setForm] = useState({
           value={form.title}
           onChange={handleChange}
           placeholder="Issue summary..."
-          className="
-w-full
-h-11
-border
-border-[#DFE1E6]
-rounded
-px-4
-text-[15px]
-focus:outline-none
-focus:border-[#4C9AFF]
-"
+          className="w-full h-11 border border-[#DFE1E6] rounded px-4 text-[15px] focus:outline-none focus:border-[#4C9AFF]"
         />
       </div>
 
-  {/* Priority */}
-      <div className="mb-2">
+      {/* Priority */}
+      <div className="mb-3">
         <label className="block text-sm font-semibold mb-2">
           Priority
         </label>
@@ -83,17 +136,7 @@ focus:border-[#4C9AFF]
           name="priority"
           value={form.priority}
           onChange={handleChange}
-          className="
-w-full
-h-11
-border
-border-[#DFE1E6]
-rounded
-px-4
-text-[15px]
-focus:outline-none
-focus:border-[#4C9AFF]
-"
+          className="w-full h-11 border border-[#DFE1E6] rounded px-4 text-[15px] focus:outline-none focus:border-[#4C9AFF]"
         >
           <option value="LOW">Low</option>
           <option value="MEDIUM">Medium</option>
@@ -102,7 +145,7 @@ focus:border-[#4C9AFF]
       </div>
 
       {/* Description */}
-      <div className="mb-2">
+      <div className="mb-3">
         <label className="block text-sm font-semibold mb-2">
           Description
         </label>
@@ -113,39 +156,68 @@ focus:border-[#4C9AFF]
           value={form.description}
           onChange={handleChange}
           placeholder="Describe the issue..."
-          className="
-w-full
-min-h-[120px]
-border
-border-[#DFE1E6]
-rounded
-px-4
-py-3
-resize-none
-text-[15px]
-focus:outline-none
-focus:border-[#4C9AFF]
-"
+          className="w-full min-h-[120px] border border-[#DFE1E6] rounded px-4 py-3 resize-none text-[15px] focus:outline-none focus:border-[#4C9AFF]"
         />
       </div>
 
-    
+      {/* Labels */}
+      <div className="mb-3">
+        <label className="block text-sm font-semibold mb-2">
+          Labels
+        </label>
 
-<div className="mb-2">
-  <label className="block text-sm font-semibold mb-2">
-    Reporter
-  </label>
+        <div className="grid grid-cols-3 gap-2">
+          {labelOptions.map((label) => (
+            <label
+              key={label}
+              className="flex items-center gap-2 text-sm"
+            >
+              <input
+                type="checkbox"
+                checked={form.labels.includes(label)}
+                onChange={() => handleLabelChange(label)}
+              />
+              {label}
+            </label>
+          ))}
+        </div>
+      </div>
 
-  <ReporterSelect
-    value={form.reporter}
-    onChange={(value) =>
-      setForm({
-        ...form,
-        reporter: value,
-      })
-    }
-  />
-</div>
+      {/* Due Date */}
+      <div className="mb-3">
+        <label className="block text-sm font-semibold mb-2">
+          Due Date
+        </label>
+
+        <input
+          type="date"
+          value={form.dueDate}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              dueDate: e.target.value,
+            })
+          }
+          className="w-full h-11 border border-[#DFE1E6] rounded px-4"
+        />
+      </div>
+
+      {/* Reporter */}
+      <div className="mb-3">
+        <label className="block text-sm font-semibold mb-2">
+          Reporter
+        </label>
+
+        <ReporterSelect
+          value={form.reporter}
+          onChange={(value) =>
+            setForm({
+              ...form,
+              reporter: value,
+            })
+          }
+        />
+      </div>
 
       {/* Assignee */}
       <div className="mb-6">
@@ -157,17 +229,7 @@ focus:border-[#4C9AFF]
           name="assignee"
           value={form.assignee}
           onChange={handleChange}
-         className="
-w-full
-h-11
-border
-border-[#DFE1E6]
-rounded
-px-4
-text-[15px]
-focus:outline-none
-focus:border-[#4C9AFF]
-"
+          className="w-full h-11 border border-[#DFE1E6] rounded px-4 text-[15px] focus:outline-none focus:border-[#4C9AFF]"
         >
           <option value="AP">Anmol</option>
           <option value="RK">Rahul</option>
@@ -176,7 +238,7 @@ focus:border-[#4C9AFF]
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-end gap-3 ">
+      <div className="flex justify-end gap-3">
         <button
           type="button"
           onClick={onClose}

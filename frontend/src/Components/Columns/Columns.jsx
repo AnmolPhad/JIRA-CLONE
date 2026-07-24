@@ -1,3 +1,4 @@
+import { Droppable } from "@hello-pangea/dnd";
 import IssueCard from "../IssueCard/IssueCard";
 
 const columns = [
@@ -9,15 +10,14 @@ const columns = [
 
 const Columns = ({ issues }) => {
   return (
-   <div
-  className="
-    flex
-    items-start
-    gap-4
-    mt-6
-    
-  "
->
+    <div
+      className="
+        flex
+        items-start
+        gap-4
+        mt-6
+      "
+    >
       {columns.map((column) => {
         const columnIssues = issues.filter(
           (issue) => issue.status === column.id
@@ -29,7 +29,7 @@ const Columns = ({ issues }) => {
             className="w-[280px] flex-shrink-0"
           >
             {/* Header */}
-            <div className="flex  items-center mb-3 px-1">
+            <div className="flex items-center mb-3 px-1">
               <h2 className="text-[12px] font-bold tracking-wide text-[#5E6C84] uppercase">
                 {column.title}
               </h2>
@@ -40,37 +40,43 @@ const Columns = ({ issues }) => {
             </div>
 
             {/* Column */}
-         <div
-  className="
-    bg-[#eff0f1]
-    rounded
-    p-2
-    w-full
-    flex
-    flex-col
-  "
->
-  {/* Cards */}
-  <div
-    className="
-      flex
-      flex-col
-      gap-2
-      h-[412px]
-      overflow-y-auto
-      pr-1
-    "
-  >
-    {columnIssues.map((issue) => (
-      <IssueCard
-        key={issue.id}
-        issue={issue}
-      />
-    ))}
-  </div>
+            <div
+              className="
+                bg-[#eff0f1]
+                rounded
+                p-2
+                w-full
+                flex
+                flex-col
+              "
+            >
+              <Droppable droppableId={column.id}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className="
+                      flex
+                      flex-col
+                      gap-2
+                      h-[412px]
+                      overflow-y-auto
+                      pr-1
+                    "
+                  >
+                    {columnIssues.map((issue, index) => (
+                      <IssueCard
+                        key={issue.id}
+                        issue={issue}
+                        index={index}
+                      />
+                    ))}
 
-  
-</div>
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </div>
           </div>
         );
       })}

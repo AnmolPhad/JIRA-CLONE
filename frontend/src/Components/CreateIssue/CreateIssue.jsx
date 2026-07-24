@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { X } from "lucide-react";
 import IssueForm from "./IssueForm";
 
-const CreateIssue = ({ onClose }) => {
+const CreateIssue = ({ onClose, issues, setIssues }) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -32,7 +32,6 @@ const CreateIssue = ({ onClose }) => {
         items-start
         justify-center
         overflow-y-auto
-        
       "
     >
       <div
@@ -47,7 +46,6 @@ const CreateIssue = ({ onClose }) => {
           px-8
           pt-4
           pb-9
-          
         "
       >
         {/* Close Button */}
@@ -66,13 +64,23 @@ const CreateIssue = ({ onClose }) => {
         </button>
 
         {/* Title */}
-        <h1 className="text-[24px]
-font-normal
-tracking-tight text-[#172B4D] mb-1 ">
+        <h1
+          className="
+            text-[24px]
+            font-normal
+            tracking-tight
+            text-[#172B4D]
+            mb-1
+          "
+        >
           Create Issue
         </h1>
 
-        <IssueForm onClose={onClose} />
+        <IssueForm
+          issues={issues}
+          setIssues={setIssues}
+          onClose={onClose}
+        />
       </div>
     </div>
   );
