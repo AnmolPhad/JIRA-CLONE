@@ -29,15 +29,18 @@ const Login = () => {
           u.password === loginCredentials.password
       );
 
-     if (user) {
-  localStorage.setItem("user", JSON.stringify(user));
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
 
-  // Redirect to Board Page after login
-  navigate("/project");
-
-} else {
-  setMessage("Invalid Email or Password");
-}
+        // Redirect based on role
+        if (user.role === "ADMIN") {
+          navigate("/admin");
+        } else {
+          navigate("/project");
+        }
+      } else {
+        setMessage("Invalid Email or Password");
+      }
 
       setIsLoggingIn(false);
       reset();
@@ -68,8 +71,8 @@ const Login = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-5"
         >
-          {/* Email */}
 
+          {/* Email */}
           <div>
             <input
               type="email"
@@ -93,7 +96,6 @@ const Login = () => {
           </div>
 
           {/* Password */}
-
           <div>
             <input
               type="password"
@@ -116,15 +118,11 @@ const Login = () => {
             )}
           </div>
 
-          {/* Error Message */}
-
           {message && (
             <div className="bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm">
               {message}
             </div>
           )}
-
-          {/* Login Button */}
 
           <button
             type="submit"
@@ -133,27 +131,42 @@ const Login = () => {
           >
             {isLoggingIn ? "Please Wait..." : "Login"}
           </button>
+
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-slate-600">
             Don't have an account?{" "}
-            <span className="text-blue-600 cursor-pointer hover:underline">
-              <a href="/register">Sign up</a>
-            </span>
+            <a
+              href="/register"
+              className="text-blue-600 hover:underline"
+            >
+              Sign up
+            </a>
           </p>
         </div>
 
-        {/* Dummy Credentials */}
-
+        {/* Demo Credentials */}
         <div className="mt-8 border-t pt-4 text-sm text-slate-500">
+
           <p className="font-semibold mb-2">
             Demo Credentials
           </p>
 
-          <p>Email: demo@gmail.com</p>
-          <p>Password: demo1234</p>
+          <div className="mb-3">
+            <p className="font-medium text-black">Admin</p>
+            <p>Email: admin@gmail.com</p>
+            <p>Password: admin123</p>
+          </div>
+
+          <div>
+            <p className="font-medium text-black">User</p>
+            <p>Email: user@gmail.com</p>
+            <p>Password: user123</p>
+          </div>
+
         </div>
+
       </div>
     </div>
   );

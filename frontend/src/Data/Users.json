@@ -1,14 +1,16 @@
 [
   {
     "id": 1,
-    "name": "demo",
-    "email": "demo@gmail.com",
-    "password": "demo1234"
+    "name": "Admin",
+    "email": "admin@gmail.com",
+    "password": "admin123",
+    "role": "ADMIN"
   },
   {
     "id": 2,
-    "name": "Admin",
-    "email": "admin@gmail.com",
-    "password": "admin123"
+    "name": "Demo User",
+    "email": "user@gmail.com",
+    "password": "user1234",
+    "role": "USER"
   }
 ]
