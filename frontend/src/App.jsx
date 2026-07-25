@@ -5,20 +5,28 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import ProtectedRoute from "./Components/auth/ProtectedRoute";
 
-// Main Layout
-import Hero from "./Components/Main/Hero";
+// Project Layout
+import Hero from "./layouts/ProjectLayout";
 
-// User Pages
+// Project Pages
+import Dashboard from "./pages/project/Dashboard";
+import Members from "./pages/project/Members";
+import Reports from "./pages/project/Reports";
+import Profile from "./pages/project/Profile";
+import ProjectSettings from "./pages/project/ProjectSettings";
+import UserSettings from "./pages/project/UserSettings";
+
+
+
+// Existing Components
 import Board from "./Components/Board/Board";
 import IssueView from "./Components/IssueView/IssueView";
-import ProjectSettings from "./Components/ProjectSettings/ProjectSettings";
-import UserSettings from "./Components/UserSettings/UserSettings";
 
 // Admin Layout
 import AdminLayout from "./layouts/AdminLayout";
 
 // Admin Pages
-import Dashboard from "./pages/admin/Dashboard";
+import AdminDashboard from "./pages/admin/Dashboard";
 import Projects from "./pages/admin/Projects";
 import ProjectDetails from "./pages/admin/ProjectDetails";
 import CreateProject from "./pages/admin/CreateProject";
@@ -27,7 +35,7 @@ import Users from "./pages/admin/Users";
 import UserDetails from "./pages/admin/UserDetails";
 import CreateUser from "./pages/admin/CreateUser";
 import EditUser from "./pages/admin/EditUser";
-import Reports from "./pages/admin/Reports";
+import AdminReports from "./pages/admin/Reports";
 import ActivityLogs from "./pages/admin/ActivityLogs";
 import SystemSettings from "./pages/admin/SystemSettings";
 
@@ -35,12 +43,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         {/* Authentication */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* User Module */}
+        {/* ================= PROJECT MODULE ================= */}
+
         <Route
           path="/project"
           element={
@@ -49,13 +57,32 @@ function App() {
             </ProtectedRoute>
           }
         >
+          {/* Dashboard */}
+          <Route path="dashboard" element={<Dashboard />} />
+
+          {/* Kanban */}
           <Route index element={<Board />} />
+          <Route path="board" element={<Board />} />
+
+          {/* Issues */}
           <Route path="issue/:id" element={<IssueView />} />
+
+          {/* Members */}
+          <Route path="members" element={<Members />} />
+
+          {/* Reports */}
+          <Route path="reports" element={<Reports />} />
+
+          {/* Settings */}
           <Route path="settings" element={<ProjectSettings />} />
           <Route path="user-settings" element={<UserSettings />} />
+
+          {/* Profile */}
+          <Route path="profile" element={<Profile />} />
         </Route>
 
-        {/* Admin Module */}
+        {/* ================= ADMIN MODULE ================= */}
+
         <Route
           path="/admin"
           element={
@@ -64,8 +91,8 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route index element={<AdminDashboard />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
 
           <Route path="projects" element={<Projects />} />
           <Route path="projects/create" element={<CreateProject />} />
@@ -77,11 +104,10 @@ function App() {
           <Route path="users/:id" element={<UserDetails />} />
           <Route path="users/edit/:id" element={<EditUser />} />
 
-          <Route path="reports" element={<Reports />} />
+          <Route path="reports" element={<AdminReports />} />
           <Route path="activity-logs" element={<ActivityLogs />} />
           <Route path="settings" element={<SystemSettings />} />
         </Route>
-
       </Routes>
     </BrowserRouter>
   );

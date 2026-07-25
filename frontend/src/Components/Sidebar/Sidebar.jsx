@@ -1,18 +1,14 @@
 import { NavLink } from "react-router-dom";
-import {
-  Kanban,
-  Settings,
-  User,
-  Releases,
-  Search,
-  Pages,
-  Reports,
-  Components,
-} from "../../icons";
+import { sidebarMenus } from "../../config/sidebarMenus";
 
 const Sidebar = ({
   name = "Jira Clone",
   category = "SOFTWARE",
+  projectLogo = "J",
+
+  // Default role
+  role = "PROJECT_MEMBER",
+  //  role = "PROJECT_LEAD",
 }) => {
   const categoryMap = {
     SOFTWARE: "Software",
@@ -20,50 +16,41 @@ const Sidebar = ({
     MARKETING: "Marketing",
   };
 
-  const menu = [
-    {
-      title: "Kanban Board",
-      icon: <Kanban size={18} />,
-      link: "/project",
-    },
-    {
-      title: "Project Settings",
-      icon: <Settings size={18} />,
-      link: "/project/settings",
-    },
-    {
-      title: "User Settings",
-      icon: <User size={18} />,
-      link: "/project/user-settings",
-    },
-  ];
-
-  const others = [
-    { title: "Releases", icon: <Releases size={18} /> },
-    { title: "Issues & Filters", icon: <Search size={18} /> },
-    { title: "Pages", icon: <Pages size={18} /> },
-    { title: "Reports", icon: <Reports size={18} /> },
-    { title: "Components", icon: <Components size={18} /> },
-  ];
+  // Get menu according to role
+  const { mainMenu, bottomMenu } =
+    sidebarMenus[role] || sidebarMenus.PROJECT_MEMBER;
 
   return (
     <aside
       className="
-      fixed
-      left-16
-      top-0
-      h-screen
-      w-[240px]
-      bg-[#F4F5F7]
-      border-r
-      border-[#DFE1E6]
-      overflow-y-auto
-    "
+        fixed
+        left-16
+        top-0
+        h-screen
+        w-[240px]
+        bg-[#F4F5F7]
+        border-r
+        border-[#DFE1E6]
+        overflow-y-auto
+      "
     >
       {/* Project Header */}
       <div className="flex items-start px-4 py-6">
-        <div className="w-10 h-10 bg-[#0052CC] rounded flex items-center justify-center text-white font-bold text-lg">
-          J
+        <div
+          className="
+            w-10
+            h-10
+            bg-[#0052CC]
+            rounded
+            flex
+            items-center
+            justify-center
+            text-white
+            font-bold
+            text-lg
+          "
+        >
+          {projectLogo}
         </div>
 
         <div className="ml-3">
@@ -72,53 +59,67 @@ const Sidebar = ({
           </div>
 
           <div className="text-[14px] text-[#42526E]">
-            {categoryMap[category]} project
+            {categoryMap[category]} Project
           </div>
         </div>
       </div>
 
       {/* Main Navigation */}
       <div className="px-2">
-        {menu.map((item) => (
-          <NavLink
-            key={item.title}
-            to={item.link}
-            end={item.link === "/project"}
-            className={({ isActive }) =>
-              `flex items-center px-3 py-2 text-[15px] mb-1 transition
-              ${
-                isActive
-                  ? "bg-[#EBECF0] text-[#0052CC] font-semibold"
-                  : "text-[#42526E] hover:bg-[#EBECF0]"
-              }`
-            }
-          >
-            <span className="mr-4">{item.icon}</span>
-            {item.title}
-          </NavLink>
-        ))}
+       {mainMenu.map((item) => {
+  const Icon = item.icon;
 
-        <div className="border-t border-[#DFE1E6] my-4" />
+  return (
+    <NavLink
+      key={item.title}
+      to={item.link}
+      end={item.link === "/project"}
+      className={({ isActive }) =>
+        `flex items-center px-3 py-2 text-[15px] mb-1 transition ${
+          isActive
+            ? "bg-[#EBECF0] text-[#0052CC] font-semibold"
+            : "text-[#42526E] hover:bg-[#EBECF0]"
+        }`
+      }
+    >
+      <span className="mr-4">
+        <Icon size={18} />
+      </span>
 
-        {others.map((item) => (
-          <div
-            key={item.title}
-            className="
-            flex
-            items-center
-            px-3
-            py-2
-            text-[15px]
-            text-[#42526E]
-            cursor-pointer
-            hover:bg-[#EBECF0]
-            mb-1
-          "
-          >
-            <span className="mr-4">{item.icon}</span>
-            {item.title}
-          </div>
-        ))}
+      {item.title}
+    </NavLink>
+  );
+})}
+
+        {bottomMenu.length > 0 && (
+          <>
+            <div className="border-t border-[#DFE1E6] my-4"/>
+
+          {bottomMenu.map((item) => {
+  const Icon = item.icon;
+
+  return (
+    <NavLink
+      key={item.title}
+      to={item.link}
+      className={({ isActive }) =>
+        `flex items-center px-3 py-2 text-[15px] mb-1 transition ${
+          isActive
+            ? "bg-[#EBECF0] text-[#0052CC] font-semibold"
+            : "text-[#42526E] hover:bg-[#EBECF0]"
+        }`
+      }
+    >
+      <span className="mr-4">
+        <Icon size={18} />
+      </span>
+
+      {item.title}
+    </NavLink>
+  );
+})}
+          </>
+        )}
       </div>
     </aside>
   );
