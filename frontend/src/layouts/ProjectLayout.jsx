@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import Navbar from "../Navbar/Navbar";
-import Sidebar from "../Sidebar/Sidebar";
+import Navbar from "../Components/Navbar/Navbar";
+import Sidebar from "../Components/Sidebar/Sidebar";
 
 const initialIssues = [
   {
@@ -46,7 +46,7 @@ const initialIssues = [
   },
 ];
 
-function Hero() {
+function ProjectLayout() {
   const [issues, setIssues] = useState(() => {
     const savedIssues = localStorage.getItem("issues");
 
@@ -63,10 +63,7 @@ function Hero() {
 
   return (
     <div className="min-h-screen bg-[#FAFBFC]">
-      <Navbar
-        issues={issues}
-        setIssues={setIssues}
-      />
+      <Navbar issues={issues} setIssues={setIssues} />
 
       <Sidebar />
 
@@ -79,4 +76,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default ProjectLayout;
