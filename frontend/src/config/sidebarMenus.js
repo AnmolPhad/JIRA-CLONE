@@ -44,7 +44,7 @@ export const sidebarMenus = {
       {
         title: "Logout",
         icon: User,
-        link: "/logout",
+        link: "/",
       },
     ],
   },
@@ -79,7 +79,7 @@ export const sidebarMenus = {
       {
         title: "Logout",
         icon: User,
-        link: "/logout",
+        link: "/",
       },
     ],
   },

@@ -5,10 +5,8 @@ const Sidebar = ({
   name = "Jira Clone",
   category = "SOFTWARE",
   projectLogo = "J",
-
-  // Default role
+  // role = "PROJECT_LEAD",
   role = "PROJECT_MEMBER",
-  //  role = "PROJECT_LEAD",
 }) => {
   const categoryMap = {
     SOFTWARE: "Software",
@@ -32,10 +30,12 @@ const Sidebar = ({
         border-r
         border-[#DFE1E6]
         overflow-y-auto
+        flex
+        flex-col
       "
     >
       {/* Project Header */}
-      <div className="flex items-start px-4 py-6">
+      <div className="flex items-start px-4 py-6 flex-shrink-0">
         <div
           className="
             w-10
@@ -64,63 +64,61 @@ const Sidebar = ({
         </div>
       </div>
 
-      {/* Main Navigation */}
-      <div className="px-2">
-       {mainMenu.map((item) => {
-  const Icon = item.icon;
+      {/* Main Navigation - Takes remaining space */}
+      <div className="px-2 flex-1 overflow-y-auto">
+        {mainMenu.map((item) => {
+          const Icon = item.icon;
 
-  return (
-    <NavLink
-      key={item.title}
-      to={item.link}
-      end={item.link === "/project"}
-      className={({ isActive }) =>
-        `flex items-center px-3 py-2 text-[15px] mb-1 transition ${
-          isActive
-            ? "bg-[#EBECF0] text-[#0052CC] font-semibold"
-            : "text-[#42526E] hover:bg-[#EBECF0]"
-        }`
-      }
-    >
-      <span className="mr-4">
-        <Icon size={18} />
-      </span>
-
-      {item.title}
-    </NavLink>
-  );
-})}
-
-        {bottomMenu.length > 0 && (
-          <>
-            <div className="border-t border-[#DFE1E6] my-4"/>
-
-          {bottomMenu.map((item) => {
-  const Icon = item.icon;
-
-  return (
-    <NavLink
-      key={item.title}
-      to={item.link}
-      className={({ isActive }) =>
-        `flex items-center px-3 py-2 text-[15px] mb-1 transition ${
-          isActive
-            ? "bg-[#EBECF0] text-[#0052CC] font-semibold"
-            : "text-[#42526E] hover:bg-[#EBECF0]"
-        }`
-      }
-    >
-      <span className="mr-4">
-        <Icon size={18} />
-      </span>
-
-      {item.title}
-    </NavLink>
-  );
-})}
-          </>
-        )}
+          return (
+            <NavLink
+              key={item.title}
+              to={item.link}
+              end={item.link === "/project"}
+              className={({ isActive }) =>
+                `flex items-center px-3 py-2 text-[15px] mb-1 transition ${
+                  isActive
+                    ? "bg-[#EBECF0] text-[#0052CC] font-semibold"
+                    : "text-[#42526E] hover:bg-[#EBECF0]"
+                }`
+              }
+            >
+              <span className="mr-4">
+                <Icon size={18} />
+              </span>
+              {item.title}
+            </NavLink>
+          );
+        })}
       </div>
+
+      {/* Bottom Navigation - Fixed at bottom */}
+      {bottomMenu.length > 0 && (
+        <div className="px-2 pb-4 flex-shrink-0">
+          <div className="border-t border-[#DFE1E6] my-4" />
+          {bottomMenu.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <NavLink
+                key={item.title}
+                to={item.link}
+                className={({ isActive }) =>
+                  `flex items-center px-3 py-2 text-[15px] mb-1 transition ${
+                    isActive
+                      ? "bg-[#EBECF0] text-[#0052CC] font-semibold"
+                      : "text-[#42526E] hover:bg-[#EBECF0]"
+                  }`
+                }
+              >
+                <span className="mr-4">
+                  <Icon size={18} />
+                </span>
+                {item.title}
+              </NavLink>
+            );
+          })}
+        </div>
+      )}
     </aside>
   );
 };
