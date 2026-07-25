@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 const ProjectSettings = () => {
   const navigate = useNavigate();
 
-  const [project, setProject] = useState({
-    name: "Jira Clone",
-    url: "https://jiralite.com",
-    category: "SOFTWARE",
-    description: "",
-  });
+const [project, setProject] = useState({
+  name: "Mini Jira",
+  key: "MJR",
+  url: "https://minijira.com/projects/MJR",
+  category: "SOFTWARE",
+  visibility: "PRIVATE",
+  description: "",
+});
 
   const handleChange = (e) => {
     setProject((prev) => ({
@@ -43,29 +45,48 @@ const ProjectSettings = () => {
             Name
           </label>
 
-          <input
-            type="text"
-            name="name"
-            value={project.name}
-            onChange={handleChange}
-            className="
-              w-full
-              rounded
-              border
-              border-[#DFE1E6]
-              px-4
-              py-3
-              text-[14px]
-              bg-white
-              hover:bg-[#F4F5F7]
-              focus:bg-white
-              focus:border-[#4C9AFF]
-              focus:ring-1
-              focus:ring-[#4C9AFF]
-              outline-none
-            "
-          />
+  <input
+  type="text"
+  value={project.name}
+  readOnly
+  className="
+    w-full
+    rounded
+    border
+    border-[#DFE1E6]
+    bg-[#F4F5F7]
+    px-4
+    py-3
+    text-[14px]
+    text-[#5E6C84]
+    cursor-not-allowed
+  "
+/>
         </div>
+
+        <div className="mb-6">
+  <label className="block text-[14px] font-semibold text-[#5E6C84] mb-2">
+    Project Key
+  </label>
+
+  <input
+    type="text"
+    value="MJR"
+    readOnly
+    className="
+      w-full
+      rounded
+      border
+      border-[#DFE1E6]
+      bg-[#F4F5F7]
+      px-4
+      py-3
+      text-[14px]
+      text-[#5E6C84]
+      cursor-not-allowed
+    "
+  />
+</div>
 
         {/* URL */}
         <div className="mb-6">
@@ -192,6 +213,8 @@ const ProjectSettings = () => {
             Cancel
           </button>
         </div>
+
+
 
       </div>
     </div>
